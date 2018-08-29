@@ -35,34 +35,3 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
     """
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
-
-# class ProviderList(generics.ListCreateAPIView):
-#     """
-#     API endpoint that allows provider to be viewed or edited.
-#     """
-#     queryset = Provider.objects.all()
-#     serializer_class = ProviderSerializer
-#
-#
-# class ProviderDetail(generics.RetrieveUpdateDestroyAPIView):
-#     """
-#     API endpoint that allows provider to be viewed or edited.
-#     """
-#     queryset = Provider.objects.all()
-#     serializer_class = ProviderSerializer
-#
-#
-# class ServiceAreaList(generics.ListCreateAPIView):
-#     """
-#     API endpoint that allows service area to be viewed or edited.
-#     """
-#     queryset = ServiceArea.objects.all()
-#     serializer_class = ServiceAreaSerializer
-#
-#
-# class ServiceAreaDetail(generics.RetrieveUpdateDestroyAPIView):
-#     """
-#     API endpoint that allows service area to be viewed or edited.
-#     """
-#     queryset = ServiceArea.objects.all()
-#     serializer_class = ServiceAreaSerializer
