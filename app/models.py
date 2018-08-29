@@ -1,4 +1,5 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Currency alphabetic codes. ISO 4217
 CURRENCY_CHOICES = (
@@ -278,6 +279,28 @@ LANGUAGE_CHOICES = (
 )
 
 
+class ServiceArea(models.Model):
+    """
+    Service area of provider
+    """
+    # Name of service area
+    name = models.CharField(max_length=50)
+    # Price
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    # Currency alphabetic code. ISO 4217. See: https://www.currency-iso.org/en/home/tables/table-a1.html
+    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=50)
+    # GeoDjango-specific: a geometry field (MultiPolygonField)
+    poly = models.MultiPolygonField()
+
+    class Meta:
+        verbose_name = _('Service Area')
+        verbose_name_plural = _('Service Areas')
+        ordering = ['name']
+
+    def __str__(self):
+        return '[{}] {}'.format(self.pk, self.name)
+
+
 class Provider(models.Model):
     """
     Provider (transportation supplier)
@@ -292,3 +315,13 @@ class Provider(models.Model):
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=50)
     # Currency alphabetic code. ISO 4217. See: https://www.currency-iso.org/en/home/tables/table-a1.html
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=50)
+    # Provider can have multiple service areas
+    service_areas = models.ManyToManyField(ServiceArea)
+
+    class Meta:
+        verbose_name = _('Provider')
+        verbose_name_plural = _('Providers')
+        ordering = ['name']
+
+    def __str__(self):
+        return '[{}] {}'.format(self.pk, self.name)
