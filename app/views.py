@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets
 
 from app.models import Provider, ServiceArea
 from app.serializers import UserSerializer, GroupSerializer, ProviderSerializer, ServiceAreaSerializer
