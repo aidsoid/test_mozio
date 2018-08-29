@@ -9,6 +9,7 @@ name = "pypi"
 django = "==2.1"
 "psycopg2-binary" = "==2.7.5"
 djangorestframework = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.6"

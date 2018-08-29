@@ -23,5 +23,8 @@ local-migrate:
 local-createsuperuser:
 	pipenv shell python manage.py createsuperuser
 
+local-flake8:
+	pipenv shell flake8
+
 copy-id:
 	ssh-copy-id -p $(REMOTE_PORT) $(REMOTE_USER)@$(REMOTE_HOST)
