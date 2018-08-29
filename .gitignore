@@ -1,0 +1,8 @@
+# Bytecode compiled
+__pycache__/
+# PyCharm
+/.idea/
+# Pipenv
+/.venv/
+# Default SQLite database for Django
+/db.sqlite3
