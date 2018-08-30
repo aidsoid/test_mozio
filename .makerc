@@ -1,7 +1,14 @@
-# server settings
+APP_NAME=test_mozio
+
+# remote settings
+DOCKER_HUB_USERNAME=
+DOCKER_HUB_PASSWORD=
+
+REMOTE_USER=test_mozio
 REMOTE_HOST=
 REMOTE_PORT=22
-REMOTE_USER=
+REMOTE_COMPOSE=/home/test_mozio/test_mozio/docker-compose.yml
+REMOTE_NGINX_CONF=/home/test_mozio/test_mozio/nginx.conf
 
 # local settings
 LOCAL_POSTGRESS_HOST=127.0.0.1

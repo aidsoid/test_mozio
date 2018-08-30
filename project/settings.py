@@ -125,3 +125,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv('DJANGO_STATIC_ROOT', '/srv/test_mozio/static/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.getenv('DJANGO_MEDIA_ROOT', '/srv/test_mozio/media/')

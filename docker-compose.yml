@@ -1,0 +1,39 @@
+version: '2'
+services:
+  app:
+    container_name: app
+    #    image: aidsoid/test_mozio:latest
+    build: ./
+    volumes:
+      - static:/srv/test_mozio/static
+      - ./media:/srv/test_mozio/media
+      - media:/srv/test_mozio/media
+    links:
+      - db
+    ports:
+      - 8000:8000
+    command: sh -c "pipenv run python manage.py collectstatic --clear --noinput && pipenv run python manage.py migrate && pipenv run gunicorn project.wsgi"
+  db:
+    container_name: db
+    image: mdillon/postgis
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_mozio
+    volumes:
+      - ./db:/var/lib/postgresql/data
+  nginx:
+    container_name: nginx
+    image: nginx:1.13.5-alpine
+    ports:
+      - 80:80
+    volumes:
+      - static:/srv/test_mozio/static
+      - ./media:/srv/test_mozio/media
+      - media:/srv/test_mozio/media
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    links:
+      - app
+
+volumes:
+  static:
+  media:
