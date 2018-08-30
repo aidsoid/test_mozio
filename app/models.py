@@ -316,7 +316,7 @@ class Provider(models.Model):
     # Currency alphabetic code. ISO 4217. See: https://www.currency-iso.org/en/home/tables/table-a1.html
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=50)
     # Provider can have multiple service areas
-    service_areas = models.ManyToManyField(ServiceArea)
+    service_areas = models.ManyToManyField(ServiceArea, related_name='providers')
 
     class Meta:
         verbose_name = _('Provider')

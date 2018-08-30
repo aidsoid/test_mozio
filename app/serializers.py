@@ -23,6 +23,8 @@ class ProviderSerializer(serializers.ModelSerializer):
 
 
 class ServiceAreaSerializer(serializers.ModelSerializer):
+    providers = ProviderSerializer(read_only=True, many=True)
+
     class Meta:
         model = ServiceArea
-        fields = ('id', 'name', 'price', 'currency', 'poly')
+        fields = ('id', 'name', 'price', 'currency', 'poly', 'providers')

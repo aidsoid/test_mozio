@@ -27,6 +27,7 @@ router.register(r'api/v1/service_areas', views.ServiceAreaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('api/v1/service_areas/by_coord/<str:latitude>,<str:longitude>/', views.FindServiceAreas.as_view()),
     # Admin
     path('admin/', admin.site.urls),
 ]

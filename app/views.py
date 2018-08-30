@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User, Group
+from django.contrib.gis.geos import Point
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from app.models import Provider, ServiceArea
 from app.serializers import UserSerializer, GroupSerializer, ProviderSerializer, ServiceAreaSerializer
@@ -35,3 +38,16 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
     """
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
+
+
+class FindServiceAreas(APIView):
+    """
+    API endpoint that allows to find service areas by coords.
+    """
+    def get(self, request, latitude, longitude, format=None):
+        latitude = float(latitude)
+        longitude = float(longitude)
+        point = Point(latitude, longitude)
+        service_areas = ServiceArea.objects.filter(poly__intersects=point)
+        serializer = ServiceAreaSerializer(service_areas, many=True)
+        return Response(serializer.data)
